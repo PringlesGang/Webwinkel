@@ -1,0 +1,39 @@
+<head>
+    <title>Webwinkel</title>
+    <script src="/js/index.js"></script>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body onload="initialize()">
+    <div class="constainer">
+        <div class="menu">
+            <ul>
+                <li class="logo"><img src="/images/cannabis.png"></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/order" class="basket-btn"><span>Shopping basket</span></a></li>
+            </ul> 
+        </div>
+
+        <h1>Prachtige webwinkel met css</h1>
+        <div id="cart">Cart: 0</br>Price: €0</div>
+        <input type="button" value="Empty Cart" onclick="emptyCart()"></br></br>
+
+        <!--Template products on page-->
+        <% for (const category of productCategories) { %>
+            <div class="row">
+                <div class="chapter"><h2><%= category[0].category %></h2>
+                    <% for (const product of category) { %>
+                        <div data-item="<%= product.name %>" data-stock="<%= product.stock %>" data-price="<%= product.price %>" data-description="<%= product.description %>" data-id="<%= product.id %>" name="item" class="column">
+                            <h3><%= product.name%></h3>
+                            <img src="/images/<%= product.image %>.gif"></br>
+                            <p><%= product.description %></p>
+                            <input type="button" value="-" onclick="removeItem(this.parentNode.dataset)">
+                            <input type="number" value="0" min="0" max="<%= product.stock %>" onchange="updateCart()">
+                            <input type="button" value="+" onclick="addItem(this.parentNode.dataset)">
+                            <p>Price: €<%= product.price / 100 %></br>Stock: <%= product.stock %></p></br></br>
+                        </div>
+                    <% } %>
+                </div>
+            </div>
+        <% } %>
+    </div>
+</body>

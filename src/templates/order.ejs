@@ -1,0 +1,87 @@
+<html>
+    <head>
+        <script src="/js/api.js"></script>
+        <script src="/js/order.js"></script>
+        <link rel="stylesheet" href="/css/style.css">
+        <style>
+
+            input[type=text], select {
+                width: 100%;
+                padding: 12px 20px;
+                margin: 8px 0;
+                display: inline-block;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+            }
+            
+            input[type=number], select {
+                width: 100%;
+                padding: 12px 20px;
+                margin: 8px 0;
+                display: inline-block;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+            }
+            
+            input[type=button] {
+                width: 100%;
+                background-color: #4CAF50;
+                color: white;
+                padding: 14px 20px;
+                margin: 8px 0;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+            
+            input[type=button]:hover {
+                background-color: #45a049;
+            }
+            
+            div {
+                border-radius: 5px;
+                background-color: #f2f2f2;
+                padding: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+			<div class="menu">
+				<ul>
+					<li class="logo"><a href="/"><img src="/images/cannabis.png"></a></li>
+					<li><a href="/">Home</a></li>
+					<li><a href="/contact">Contact</a></li>
+				</ul> 
+	    </div>
+
+        <div class="payment">
+            Address: <input type="text" id="address" placeholder="Your address..."></br>
+            Name: <input type="text" id="name" placeholder="Your full name..."></br>
+            Card Number: <input type="number" id="cardNum" min="0" max="9999" placeholder="Your card number..."></br>
+            Bank Number: <input type="number" id="bankNum" min="0" max="9999999999" placeholder="Your bank number..."></br>
+            <input type="button" value="Buy" onclick="buy()">
+        </div>
+
+        <div id="products">
+            <h2>Your products:</br></br></h2>
+            <p>
+            <!--For every product ordered-->
+            <% for (let i = 0; i < cart.length; i++) { 
+                let itemName;
+                //Get the name by comparing the IDs
+                for (let j = 0; j < products.length; j++) {
+                    if (products[j].id == cart[i].id) {
+                        itemName = products[j].name;
+                        break;
+                    }
+                }%>
+                <!--Display the name of the item and the amount you want to buy-->
+                <%= itemName %>: <%= cart[i].amount %></br>
+            <% } %>
+            </p>
+        </div>
+    </body>
+</html>
